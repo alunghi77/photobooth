@@ -10,6 +10,8 @@
 
   st = process.openStdin();
 
+  st.setRawMode(true);
+
   st.addListener("data", function(d) {
     var ws;
     sys.print("Sending...\n");
