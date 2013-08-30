@@ -22,6 +22,8 @@ st.addListener "data", (d) ->
 
 	ws.on 'message', (data, flags) ->
 
+		console.log data
+
 		# flags.binary will be set if a binary data is received
 		# flags.masked will be set if the data was masked
 		

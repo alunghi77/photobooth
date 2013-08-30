@@ -92,6 +92,13 @@ wsServer.on "request", (request) ->
 
 				currentMsg["camera2"] = true
 
+			if remoteAddress is "192.168.1.116"
+
+				currentMsg["phone"] = true
+
+			console.log currentMsg
+
+
 			messageSendObj = {}
 			messageSendObj["type"] = "message"
 			messageSendObj["data"] = currentMsg

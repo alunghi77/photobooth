@@ -19,9 +19,10 @@
   };
 
   chat = function() {
-    var connection, input, status;
+    var connection, input, status, takePhoto;
     input = $("#form_chat");
     status = $(".status h4");
+    takePhoto = $("#take_photo");
     status.closest(".status").slideUp("fast");
     window.WebSocket = window.WebSocket || window.MozWebSocket;
     if (!window.WebSocket) {
@@ -39,7 +40,6 @@
       return input.removeAttr('disabled');
     };
     connection.onerror = function(error) {
-      console.log("asdsadas");
       return status.html($('<p>', {
         text: 'Sorry, but there\'s some problem with your connection or the server is down.'
       }));
@@ -73,6 +73,10 @@
         }
       }
     });
+    takePhoto.on("click", function() {
+      connection.send("take_photo");
+      return false;
+    });
     return setInterval(function() {
       if (connection.readyState !== 1) {
         status.closest(".status").removeClass("alert-success").addClass("alert-error");
@@ -86,17 +90,12 @@
   $(function() {
     chat();
     if ($(".chat-scroller").length > 0) {
-      $(".chat-scroller").mCustomScrollbar({
+      return $(".chat-scroller").mCustomScrollbar({
         scrollButtons: {
           enable: true
         }
       });
     }
-    return $("#take_photo").on("click", function() {
-      return $.post("/server/node-js-ws-server.js", {
-        "action": "take_photo"
-      }, function(res, status) {});
-    });
   });
 
 }).call(this);

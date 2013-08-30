@@ -61,6 +61,10 @@
         if (remoteAddress === "192.168.1.131") {
           currentMsg["camera2"] = true;
         }
+        if (remoteAddress === "192.168.1.116") {
+          currentMsg["phone"] = true;
+        }
+        console.log(currentMsg);
         messageSendObj = {};
         messageSendObj["type"] = "message";
         messageSendObj["data"] = currentMsg;

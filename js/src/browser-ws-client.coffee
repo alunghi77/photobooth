@@ -26,8 +26,9 @@ create_chat = (msg) ->
 #
 chat = ()->
 
-	input 	= $("#form_chat")
-	status 	= $(".status h4")
+	input 		= $("#form_chat")
+	status 		= $(".status h4")
+	takePhoto 	= $("#take_photo")
 
 	status.closest(".status").slideUp "fast"
 
@@ -54,7 +55,7 @@ chat = ()->
 		input.removeAttr('disabled')
 
 	connection.onerror = (error) ->
-		console.log "asdsadas"
+
 		# an error occurred when sending/receiving data
 		status.html($('<p>', { text: 'Sorry, but there\'s some problem with your connection or the server is down.' } ))
 
@@ -110,6 +111,13 @@ chat = ()->
 				myName = msg
 
 
+	takePhoto.on "click", () ->
+
+		# send the message as an ordinary text
+		connection.send "take_photo"
+
+		return false
+
 	#
 	# This method is optional. If the server wasn't able to respond to the
 	# in 3 seconds then show some error message to notify the user that
@@ -126,6 +134,8 @@ chat = ()->
 
 	, 3000
 
+
+
 $ ->
 
 	chat()
@@ -137,12 +147,6 @@ $ ->
 				enable:true
 			}
 		}
-
-
-	$("#take_photo").on "click", () ->
-
-		$.post "/server/node-js-ws-server.js", {"action" : "take_photo"}, (res, status ) ->
-
 
 
 

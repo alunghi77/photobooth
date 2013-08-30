@@ -20,7 +20,9 @@
     ws.on('open', function() {
       return ws.send(d);
     });
-    ws.on('message', function(data, flags) {});
+    ws.on('message', function(data, flags) {
+      return console.log(data);
+    });
     return sys.print("Scan Barcode : ");
   });
 
