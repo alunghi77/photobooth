@@ -10,6 +10,27 @@ WebSocketServer = require('websocket').server
 http 			= require('http')
 querystring 	= require('querystring');
 
+
+BinaryServer 	= require('binaryjs').BinaryServer
+fs 				= require('fs')
+
+# Start Binary.js server
+server = BinaryServer({port: 9000})
+
+# Wait for new user connections
+server.on 'connection', (client) ->
+
+	# # Stream a flower as a hello!
+	# file = fs.createReadStream('../img/icons-phone.png')
+	# client.send(file) 
+
+	client.on 'stream', (stream, meta) ->
+		
+		file = fs.createWriteStream(meta.file)
+		
+		stream.pipe(file)
+
+
 postRequest = (request, response, callback) ->
 	
 	queryData = ""

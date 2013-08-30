@@ -1,41 +1,16 @@
 # https://github.com/flatiron/prompt and https://github.com/qrpike/NodeJS-CLI-Listener
 
-WebSocket 	= require('ws')
-sys 		= require("util")
-exec 		= require('child_process').exec
-Hashids 	= require('hashids')
-FileReader 	= require('FileReader');
-WebSocket 	= require('ws');
+WebSocket 		= require('ws')
+sys 			= require("util")
+exec 			= require('child_process').exec
+Hashids 		= require('hashids')
+BinaryClient 	= require('binaryjs').BinaryClient
+fs 				= require('fs')
 
 endpoint 	= 'ws://192.168.1.116:1337'
 
 st = process.openStdin()
 st.setEncoding( 'utf8' );
-
-#http://rezoner.net/how-to-send-and-receive-binary-data-over-websockets,4
-# wsSendBinary = (socket, data) ->
-  
-# 	# Encode packet with BiSON to safe up to 50% against JSON.stringify
-# 	bisonPacket = BISON.encode(data);
-
-# 	# A tricky part is that you will get nothing sending data as-is.
-# 	# Our bison string is build of chars with indexes from 0 to 255.
-# 	# utf-8 uses extra byte to encode char beyond index 127 so u will end up
-# 	# sending value which can be represented by one byte in two bytes.
-# 	# To take advantage of binary transport we will have to convert our data
-# 	# to javascript typed array. Unsigned Int 8 will do best.
-
-# 	uint8Packet = new Uint8Array(packet.length);
-
-# 	for i in = 0, len = bisonPacket.length; i < len; i++) {
-# 		uint8Packet[i] = packet.charCodeAt(i);
-# 	}
-
-# 	# This is how sending binary data looks like with ws library
-#   	socket.send(uint8Packet, {binary: true, mask: true});
-# }
-
-
 
 ws = new WebSocket(endpoint);
 
@@ -58,29 +33,17 @@ ws.on 'message', (data, flags) ->
 
 			sys.print(stdout)
 
-			reader = new FileReader()
+			# Connect to Binary.js server
+			client = new BinaryClient('ws://192.168.1.116:9000')
 
-			# There is also readAsBinaryString method if you are not using typed arrays
-			reader.readAsArrayBuffer event.data
+			# Received new stream from server!
+			client.on 'open', () ->
 
-			# As the stream finish to load we can use the results
-			reader.onloadend = () ->
+				#Buffer for parts
+				parts = [];
 
-				view = new Uint8Array(this.result)
-
-				console.log view
-
-				# str = ""
-
-				# for (i = 0; i < view.length; i++) {
-				# 	str += String.fromCharCode(view[i])
-				# }
-
-				# message = BISON.decode(str)                   
-
-				# console.log message
-
-				# return message
+				file 	= fs.createWriteStream("../photos/image_#{hash}.jpg");				
+				stream 	= client.send(file, {name: "image_#{hash}.jpg" });
 
 	if dataObj.data.text is "start_video"
 

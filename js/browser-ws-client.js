@@ -88,14 +88,29 @@
   };
 
   $(function() {
+    var client;
     chat();
     if ($(".chat-scroller").length > 0) {
-      return $(".chat-scroller").mCustomScrollbar({
+      $(".chat-scroller").mCustomScrollbar({
         scrollButtons: {
           enable: true
         }
       });
     }
+    client = new BinaryClient('ws://192.168.1.116:9000');
+    return client.on('stream', function(stream, meta) {
+      var parts;
+      parts = [];
+      stream.on('data', function(data) {
+        return parts.push(data);
+      });
+      return stream.on('end', function() {
+        var img;
+        img = document.createElement("img");
+        img.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
+        return document.body.appendChild(img);
+      });
+    });
   });
 
 }).call(this);

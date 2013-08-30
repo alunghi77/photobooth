@@ -135,7 +135,6 @@ chat = ()->
 	, 3000
 
 
-
 $ ->
 
 	chat()
@@ -148,6 +147,28 @@ $ ->
 			}
 		}
 
+
+	# Connect to Binary.js server
+	client = new BinaryClient('ws://192.168.1.116:9000')
+
+	# Received new stream from server!
+	client.on 'stream', (stream, meta) ->
+
+		#Buffer for parts
+		parts = [];
+		
+		#Got new data
+		stream.on 'data', (data) ->
+			
+			parts.push(data);
+
+		stream.on 'end', () ->
+		
+			#Display new data in browser!
+			img = document.createElement("img")
+			img.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts))
+			
+			document.body.appendChild(img)
 
 
 
