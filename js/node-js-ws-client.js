@@ -16,7 +16,7 @@
     WebSocket = require('ws');
     ws = new WebSocket(endpoint);
     ws.on('open', function() {
-      return ws.send();
+      return ws.send(d);
     });
     ws.on('message', function(data, flags) {
       return console.log(data);

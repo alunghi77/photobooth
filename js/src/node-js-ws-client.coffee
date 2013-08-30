@@ -17,7 +17,7 @@ st.addListener "data", (d) ->
 	
 	ws.on 'open', () ->
 
-		ws.send()
+		ws.send(d)
 
 	ws.on 'message', (data, flags) ->
 
