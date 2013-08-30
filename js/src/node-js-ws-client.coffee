@@ -26,12 +26,12 @@ st.addListener "data", (d) ->
 
 		console.log data
 
-		if data.data.text is "take_photo"
+		# if data.data.text is "take_photo"
 
-			# run camera
-			exec "raspivid -o video.h264 -t 10000", (error, stdout, stderr) ->
+		# 	# run camera
+		# 	exec "raspivid -o video.h264 -t 10000", (error, stdout, stderr) ->
 
-				sys.print(stdout)
+		# 		sys.print(stdout)
 
 		# flags.binary will be set if a binary data is received
 		# flags.masked will be set if the data was masked
