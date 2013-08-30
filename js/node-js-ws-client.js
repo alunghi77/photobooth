@@ -4,7 +4,7 @@
 
   WebSocket = require('ws');
 
-  sys = require("sys");
+  sys = require("util");
 
   endpoint = 'ws://192.168.1.116:1337';
 
@@ -16,9 +16,11 @@
     WebSocket = require('ws');
     ws = new WebSocket(endpoint);
     ws.on('open', function() {
-      return ws.send(d);
+      return ws.send();
     });
-    ws.on('message', function(data, flags) {});
+    ws.on('message', function(data, flags) {
+      return console.log(data);
+    });
     return sys.print("Scan Barcode : ");
   });
 
