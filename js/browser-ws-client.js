@@ -29,7 +29,7 @@
       }));
       return;
     }
-    connection = new WebSocket('ws://127.0.0.1:1337');
+    connection = new WebSocket('ws://192.168.1.116:1337');
     connection.onopen = function() {
       status.closest(".status").removeClass("alert-error").addClass("alert-success");
       status.closest(".status").slideDown("fast");
@@ -38,12 +38,14 @@
       return input.removeAttr('disabled');
     };
     connection.onerror = function(error) {
+      console.log("asdsadas");
       return status.html($('<p>', {
         text: 'Sorry, but there\'s some problem with your connection or the server is down.'
       }));
     };
     connection.onmessage = function(message) {
       var currentMsg;
+      console.log("assadas");
       try {
         currentMsg = JSON.parse(message.data);
       } catch (e) {

@@ -42,6 +42,7 @@ wsServer = new WebSocketServer({
 wsServer.on "request", (request) ->
 
 	console.log new Date() + ' Connection from origin ' + request.origin + '.'
+	remoteAddress = request.remoteAddress
 
 	# if request.origin isnt acceptDomain
 
@@ -60,6 +61,8 @@ wsServer.on "request", (request) ->
 	# all messages from users here.
 
 	connection.on "message", (message) ->
+
+		console.log message
 
 		# accept only text
 		if message.type is "utf8"
@@ -83,8 +86,7 @@ wsServer.on "request", (request) ->
 			currentMsg = {}
 			currentMsg["time_ago"] 	= formatDate new Date() #curr_secs + "-" + curr_mins + "-" + curr_date + "-" + curr_month + "-" + curr_year 
 			currentMsg["text"] 		= message.utf8Data
-			currentMsg["fullname"] 	= "scanner"
-			currentMsg["color"] 	= "color"
+			currentMsg["remoteAddress"] = remoteAddress
 
 			messageSendObj = {}
 			messageSendObj["type"] = "message"

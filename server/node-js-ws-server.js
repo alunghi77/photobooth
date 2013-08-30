@@ -36,13 +36,15 @@
   });
 
   wsServer.on("request", function(request) {
-    var connection, index;
+    var connection, index, remoteAddress;
     console.log(new Date() + ' Connection from origin ' + request.origin + '.');
+    remoteAddress = request.remoteAddress;
     connection = request.accept(null, request.origin);
     index = clients.push(connection) - 1;
     console.log(new Date() + ' Connection accepted.');
     connection.on("message", function(message) {
       var client, currentMsg, d, formatDate, messageSendObj, _i, _len, _results;
+      console.log(message);
       if (message.type === "utf8") {
         formatDate = function(date) {
           var normalisedDate;
@@ -53,8 +55,7 @@
         currentMsg = {};
         currentMsg["time_ago"] = formatDate(new Date());
         currentMsg["text"] = message.utf8Data;
-        currentMsg["fullname"] = "scanner";
-        currentMsg["color"] = "color";
+        currentMsg["remoteAddress"] = remoteAddress;
         messageSendObj = {};
         messageSendObj["type"] = "message";
         messageSendObj["data"] = currentMsg;

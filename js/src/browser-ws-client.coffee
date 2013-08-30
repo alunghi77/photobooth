@@ -7,7 +7,7 @@ create_chat = (msg) ->
 
 	# render
 	template 	= Handlebars.compile $("#chatItem-tmpl").html()
-	html 	 	= $.trim template {"msg":msg }	
+	html 	 	= $.trim template { "msg" : msg }	
 
 	# display
 
@@ -39,7 +39,7 @@ chat = ()->
 		
 		return
 	
-	connection = new WebSocket 'ws://127.0.0.1:1337'
+	connection = new WebSocket 'ws://192.168.1.116:1337'
 
 	connection.onopen = () ->
 
@@ -52,11 +52,13 @@ chat = ()->
 		input.removeAttr('disabled')
 
 	connection.onerror = (error) ->
-
+		console.log "asdsadas"
 		# an error occurred when sending/receiving data
 		status.html($('<p>', { text: 'Sorry, but there\'s some problem with your connection or the server is down.' } ))
 
 	connection.onmessage = (message) ->
+
+		console.log "assadas"
 
 		# try to decode json (I assume that each message from server is json)
 		try 
