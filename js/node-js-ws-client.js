@@ -20,10 +20,6 @@
 
   ws = new WebSocket(endpoint);
 
-  ws.on('open', function() {
-    return ws.send(d);
-  });
-
   ws.on('message', function(data, flags) {
     var dataObj, hash, hashids;
     dataObj = JSON.parse(data);

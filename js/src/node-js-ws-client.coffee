@@ -38,9 +38,9 @@ WebSocket = require('ws');
 
 ws = new WebSocket(endpoint);
 
-ws.on 'open', () ->
+# ws.on 'open', () ->
 
-	ws.send(d)
+# 	ws.send(d)
 
 ws.on 'message', (data, flags) ->
 
