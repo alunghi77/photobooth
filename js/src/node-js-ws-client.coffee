@@ -24,7 +24,7 @@ st.addListener "data", (d) ->
 
 	ws.on 'message', (data, flags) ->
 
-		console.log data
+		console.log data.data.text
 
 		# if data.data.text is "take_photo"
 

@@ -23,7 +23,7 @@
       return ws.send(d);
     });
     ws.on('message', function(data, flags) {
-      return console.log(data);
+      return console.log(data.data.text);
     });
     return sys.print("Scan Barcode : ");
   });
