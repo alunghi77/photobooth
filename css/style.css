@@ -22,7 +22,10 @@ body { background-color: #eee; }
 
 /* UI - chat create */
 
-.chat-container .chat-create 				{ position: relative;overflow: hidden;width:460px;padding: 15px 5px;background-color: #1ABC9C}
+.chat-container .chat-create 				{ position: relative;overflow: hidden;width:450px;padding: 0px 10px 10px;background-color: #1ABC9C}
+.chat-container .chat-create h3 			{ margin-left: 10px; margin-top: 15px}
 .chat-container .chat-create .chat-profile	{ width: 30px;float: left;margin-right: 10px;}
 .chat-container .chat-create #form_chat 	{ padding:15px;width:400px; float:left;border-radius: 0px;border: 0px;}
 
+#take_photo { text-decoration: none}
+#take_photo img { position: relative;top:-2px;left: -3px;}

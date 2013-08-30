@@ -9,6 +9,8 @@ create_chat = (msg) ->
 	template 	= Handlebars.compile $("#chatItem-tmpl").html()
 	html 	 	= $.trim template { "msg" : msg }	
 
+	console.log msg
+
 	# display
 
 	$(".chat-scroller").mCustomScrollbar("update")
@@ -57,8 +59,6 @@ chat = ()->
 		status.html($('<p>', { text: 'Sorry, but there\'s some problem with your connection or the server is down.' } ))
 
 	connection.onmessage = (message) ->
-
-		console.log "assadas"
 
 		# try to decode json (I assume that each message from server is json)
 		try 

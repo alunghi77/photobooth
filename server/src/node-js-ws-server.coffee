@@ -62,8 +62,6 @@ wsServer.on "request", (request) ->
 
 	connection.on "message", (message) ->
 
-		console.log message
-
 		# accept only text
 		if message.type is "utf8"
 
@@ -73,20 +71,25 @@ wsServer.on "request", (request) ->
 
 			d = new Date()
 
-			# curr_secs	= d.getSeconds()
-			# curr_mins	= d.getMinutes()
+			# curr_secs		= d.getSeconds()
+			# curr_mins		= d.getMinutes()
 			# curr_hours 	= d.getHours()
 			# curr_date 	= d.getDate()
 			# curr_month 	= d.getMonth() + 1
 			# curr_year 	= d.getFullYear()
 
-			
-
 			# process WebSocket message
 			currentMsg = {}
 			currentMsg["time_ago"] 	= formatDate new Date() #curr_secs + "-" + curr_mins + "-" + curr_date + "-" + curr_month + "-" + curr_year 
 			currentMsg["text"] 		= message.utf8Data
-			currentMsg["remoteAddress"] = remoteAddress
+
+			if remoteAddress is "192.168.1.130"
+
+				currentMsg["camera1"] = true
+
+			if remoteAddress is "192.168.1.131"
+
+				currentMsg["camera2"] = true
 
 			messageSendObj = {}
 			messageSendObj["type"] = "message"

@@ -30,10 +30,12 @@
 					
 				</div>
 				<div class="chat-create">
-					<div class="chat-profile">
-						<img src="./img/icons/icons-chat-profile.png" />
-					</div>
-					<h3>Raspberry Photobooth Stream <a href="" class="btn-primary btn-large pull-right" id="take_photo">Take photo</a></h3>
+					
+					<h3>Raspberry Photobooth Stream 
+						<a href="" class="btn-primary btn-large pull-right" id="take_photo">
+							<img src="./img/icons/icons-photo-profile.png" />Take photo
+						</a>
+					</h3>
 					
 					<!-- <input type="text" name="chat" id="form_chat" placeholder="Type a message..."  /> -->
 
@@ -47,7 +49,12 @@
 		
 		<div class="chat-items">
 			<div class="chat-image {{msg.data.color}}">
-				<img src="./img/icons/icons-barcode-scanner.png" />
+				{{#if msg.camera1}}
+				<img src="./img/icons/icons-photobooth1.png" />
+				{{/if}}
+				{{#if msg.camera2}}
+				<img src="./img/icons/icons-photobooth1.png" />
+				{{/if}}
 				</div>
 				<div class="content">
 					<div class="chat-user-from">

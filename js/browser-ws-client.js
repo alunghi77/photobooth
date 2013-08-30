@@ -8,6 +8,7 @@
     html = $.trim(template({
       "msg": msg
     }));
+    console.log(msg);
     $(".chat-scroller").mCustomScrollbar("update");
     $(".chat-scroller .mCSB_container").append(html);
     $(".chat-scroller").mCustomScrollbar("scrollTo", "bottom", {
@@ -45,7 +46,6 @@
     };
     connection.onmessage = function(message) {
       var currentMsg;
-      console.log("assadas");
       try {
         currentMsg = JSON.parse(message.data);
       } catch (e) {

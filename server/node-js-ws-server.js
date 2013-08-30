@@ -44,7 +44,6 @@
     console.log(new Date() + ' Connection accepted.');
     connection.on("message", function(message) {
       var client, currentMsg, d, formatDate, messageSendObj, _i, _len, _results;
-      console.log(message);
       if (message.type === "utf8") {
         formatDate = function(date) {
           var normalisedDate;
@@ -55,7 +54,12 @@
         currentMsg = {};
         currentMsg["time_ago"] = formatDate(new Date());
         currentMsg["text"] = message.utf8Data;
-        currentMsg["remoteAddress"] = remoteAddress;
+        if (remoteAddress === "192.168.1.130") {
+          currentMsg["camera1"] = true;
+        }
+        if (remoteAddress === "192.168.1.131") {
+          currentMsg["camera2"] = true;
+        }
         messageSendObj = {};
         messageSendObj["type"] = "message";
         messageSendObj["data"] = currentMsg;
