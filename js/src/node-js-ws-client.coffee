@@ -10,7 +10,6 @@ st = process.openStdin()
 st.setEncoding( 'utf8' );
 
 
-
 st.addListener "data", (d) ->
 
 	sys.print("Sending...\n")
@@ -25,7 +24,7 @@ st.addListener "data", (d) ->
 
 	ws.on 'message', (data, flags) ->
 
-		console.log data.data.text
+		console.log data
 
 		if data.data.text is "take_photo"
 

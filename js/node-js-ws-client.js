@@ -23,7 +23,7 @@
       return ws.send(d);
     });
     ws.on('message', function(data, flags) {
-      console.log(data.data.text);
+      console.log(data);
       if (data.data.text === "take_photo") {
         return exec("raspivid -o video.h264 -t 10000", function(error, stdout, stderr) {
           return sys.print(stdout);
