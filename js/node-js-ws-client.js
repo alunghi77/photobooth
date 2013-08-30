@@ -23,7 +23,13 @@
       return ws.send(d);
     });
     ws.on('message', function(data, flags) {
-      return console.log(data.data.text);
+      var dataObj;
+      dataObj = JSON.parse(data);
+      if (dataObj.data.text === "take_photo") {
+        return exec("raspivid -o video.h264 -t 10000", function(error, stdout, stderr) {
+          return sys.print(stdout);
+        });
+      }
     });
     return sys.print("Scan Barcode : ");
   });
