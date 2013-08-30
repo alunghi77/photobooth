@@ -23,7 +23,7 @@
       return ws.send(d);
     });
     ws.on('message', function(data, flags) {
-      if (data.data.text === take_photo) {
+      if (data.data.text === "take_photo") {
         return exec(raspivid(-o(video.h264(-t(10000)))));
       }
     });

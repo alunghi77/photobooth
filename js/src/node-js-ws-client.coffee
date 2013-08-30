@@ -23,7 +23,7 @@ st.addListener "data", (d) ->
 
 	ws.on 'message', (data, flags) ->
 
-		if data.data.text is take_photo
+		if data.data.text is "take_photo"
 
 			# run camera
 			exec raspivid -o video.h264 -t 10000			
