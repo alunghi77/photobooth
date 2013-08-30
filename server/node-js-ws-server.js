@@ -54,6 +54,7 @@
         currentMsg = {};
         currentMsg["time_ago"] = formatDate(new Date());
         currentMsg["text"] = message.utf8Data;
+        currentMsg["remoteAddress"] = remoteAddress;
         if (remoteAddress === "192.168.1.130") {
           currentMsg["camera1"] = true;
         }

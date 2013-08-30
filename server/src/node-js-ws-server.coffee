@@ -80,8 +80,9 @@ wsServer.on "request", (request) ->
 
 			# process WebSocket message
 			currentMsg = {}
-			currentMsg["time_ago"] 	= formatDate new Date() #curr_secs + "-" + curr_mins + "-" + curr_date + "-" + curr_month + "-" + curr_year 
-			currentMsg["text"] 		= message.utf8Data
+			currentMsg["time_ago"] 		= formatDate new Date() #curr_secs + "-" + curr_mins + "-" + curr_date + "-" + curr_month + "-" + curr_year 
+			currentMsg["text"] 			= message.utf8Data
+			currentMsg["remoteAddress"] = remoteAddress
 
 			if remoteAddress is "192.168.1.130"
 

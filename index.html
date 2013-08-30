@@ -49,19 +49,19 @@
 		
 		<div class="chat-items">
 			<div class="chat-image {{msg.data.color}}">
-				{{#if msg.camera1}}
+				{{#if msg.data.camera1}}
 				<img src="./img/icons/icons-photobooth1.png" />
 				{{/if}}
-				{{#if msg.camera2}}
+				{{#if msg.data.camera2}}
 				<img src="./img/icons/icons-photobooth1.png" />
 				{{/if}}
 				</div>
 				<div class="content">
 					<div class="chat-user-from">
-						<h4>{{msg.data.fullname}} <small>{{msg.data.time_ago}}</small></h4>
+						<h4>sent from ip: {{msg.data.remoteAddress}} <small>{{msg.data.time_ago}}</small></h4>
 					</div>
 					<div class="chat-message">
-						<p>Barcode: {{msg.data.text}}</p>
+						<p>message: {{msg.data.text}}</p>
 					</div>
 				</div>
 			</div>
