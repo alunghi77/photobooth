@@ -3,6 +3,9 @@
 WebSocket 	= require('ws')
 sys 		= require("util")
 exec 		= require('child_process').exec
+Hashids 	= require('hashids')
+
+
 
 endpoint = 'ws://192.168.1.116:1337'
 
@@ -28,8 +31,19 @@ st.addListener "data", (d) ->
 
 		if dataObj.data.text is "take_photo"
 
+			hashids = new Hashids('yweqwueqwi qwoeoqweuq uoq', 8)
+
+			hash = hashids.encrypt(1)
+
 			# run camera
-			exec "raspivid -o video.h264 -t 10000", (error, stdout, stderr) ->
+			exec "sudo raspistill -o ./photos/image_#{hash}.jpg", (error, stdout, stderr) ->
+
+				sys.print(stdout)
+
+		if dataObj.data.text is "start_video"
+
+			# run camera
+			exec "sduo raspivid -o ./videos/video.h264 -t 10000", (error, stdout, stderr) ->
 
 				sys.print(stdout)
 
