@@ -1,7 +1,7 @@
 # https://github.com/flatiron/prompt and https://github.com/qrpike/NodeJS-CLI-Listener
 
 WebSocket 	= require('ws')
-sys = require("sys")
+sys 		= require("util")
 
 endpoint = 'ws://192.168.1.116:1337'
 
