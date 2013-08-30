@@ -48,15 +48,20 @@ serverBin = BinaryServer({
 # Wait for new user connections
 serverBin.on 'connection', (client) ->
 
-	# # Stream a flower as a hello!
-	# file = fs.createReadStream('../img/icons-phone.png')
-	# client.send(file) 
-
 	client.on 'stream', (stream, meta) ->
 		
-		file = fs.createWriteStream(meta.file)
+		console.log stream
 
-		stream.pipe(file)
+		writeStream = fs.createWriteStream("./photos/#{meta.name}", { flags: 'w', encoding: null, mode: 0777 })
+
+		stream.pipe(writeStream)
+
+		stream.on 'end', () ->
+
+		writeStream.on 'error', (err) ->
+
+    		console.log(err)
+		
 
 
 # create the server

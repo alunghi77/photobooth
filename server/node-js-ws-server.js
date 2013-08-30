@@ -42,9 +42,14 @@
 
   serverBin.on('connection', function(client) {
     return client.on('stream', function(stream, meta) {
-      var file;
-      file = fs.createWriteStream(meta.file);
-      return stream.pipe(file);
+      var writeStream;
+      console.log(stream);
+      writeStream = fs.createWriteStream("./photos/" + meta.name);
+      stream.pipe(writeStream);
+      stream.on('end', function() {});
+      return writeStream.on('error', function(err) {
+        return console.log(err);
+      });
     });
   });
 
