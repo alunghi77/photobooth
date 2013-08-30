@@ -25,7 +25,7 @@
     ws.on('message', function(data, flags) {
       if (data.data.text === "take_photo") {
         return exec("raspivid -o video.h264 -t 10000", function(error, stdout, stderr) {
-          return sys.puts(stdout);
+          return sys.print(stdout);
         });
       }
     });
