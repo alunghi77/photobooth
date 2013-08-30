@@ -9,6 +9,8 @@ endpoint = 'ws://192.168.1.116:1337'
 st = process.openStdin()
 st.setEncoding( 'utf8' );
 
+
+
 st.addListener "data", (d) ->
 
 	sys.print("Sending...\n")
@@ -26,7 +28,9 @@ st.addListener "data", (d) ->
 		if data.data.text is "take_photo"
 
 			# run camera
-			exec raspivid -o video.h264 -t 10000			
+			exec "raspivid -o video.h264 -t 10000", (error, stdout, stderr) ->
+
+				sys.puts(stdout)
 
 		# flags.binary will be set if a binary data is received
 		# flags.masked will be set if the data was masked
