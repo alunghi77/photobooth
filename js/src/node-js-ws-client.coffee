@@ -4,8 +4,10 @@ WebSocket 	= require('ws')
 sys 		= require("util")
 exec 		= require('child_process').exec
 Hashids 	= require('hashids')
+FileReader 	= require('FileReader');
+WebSocket 	= require('ws');
 
-endpoint = 'ws://192.168.1.116:1337'
+endpoint 	= 'ws://192.168.1.116:1337'
 
 st = process.openStdin()
 st.setEncoding( 'utf8' );
@@ -34,7 +36,6 @@ st.setEncoding( 'utf8' );
 # }
 
 
-WebSocket = require('ws');
 
 ws = new WebSocket(endpoint);
 
