@@ -14,21 +14,6 @@ querystring 	= require('querystring');
 BinaryServer 	= require('binaryjs').BinaryServer
 fs 				= require('fs')
 
-# Start Binary.js server
-server = BinaryServer({port: 9000})
-
-# Wait for new user connections
-server.on 'connection', (client) ->
-
-	# # Stream a flower as a hello!
-	# file = fs.createReadStream('../img/icons-phone.png')
-	# client.send(file) 
-
-	client.on 'stream', (stream, meta) ->
-		
-		file = fs.createWriteStream(meta.file)
-		
-		stream.pipe(file)
 
 
 postRequest = (request, response, callback) ->
@@ -51,6 +36,28 @@ server = http.createServer (request, response) ->
 server.listen webSocketsServerPort, ()-> 
 
 	console.log new Date() + "[Welcome to Photobooth] Server is listening on port " + webSocketsServerPort
+
+# Start Binary.js server
+serverBin = BinaryServer({
+
+	httpServer: server
+	port: 9000
+
+})
+
+# Wait for new user connections
+serverBin.on 'connection', (client) ->
+
+	# # Stream a flower as a hello!
+	# file = fs.createReadStream('../img/icons-phone.png')
+	# client.send(file) 
+
+	client.on 'stream', (stream, meta) ->
+		
+		file = fs.createWriteStream(meta.file)
+
+		stream.pipe(file)
+
 
 # create the server
 wsServer = new WebSocketServer({
