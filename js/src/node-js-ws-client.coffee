@@ -42,7 +42,7 @@ ws.on 'message', (data, flags) ->
 				#Buffer for parts
 				parts = [];
 
-				file 	= fs.createWriteStream("../photos/image_#{hash}.jpg");				
+				file 	= fs.createWriteStream("./photos/image_#{hash}.jpg");				
 				stream 	= client.send(file, {name: "image_#{hash}.jpg" });
 
 	if dataObj.data.text is "start_video"

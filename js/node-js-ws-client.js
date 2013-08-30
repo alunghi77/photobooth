@@ -35,7 +35,7 @@
         return client.on('open', function() {
           var file, parts, stream;
           parts = [];
-          file = fs.createWriteStream("../photos/image_" + hash + ".jpg");
+          file = fs.createWriteStream("./photos/image_" + hash + ".jpg");
           return stream = client.send(file, {
             name: "image_" + hash + ".jpg"
           });
