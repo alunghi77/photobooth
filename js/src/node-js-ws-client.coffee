@@ -6,7 +6,7 @@ sys 		= require("util")
 endpoint = 'ws://192.168.1.116:1337'
 
 st = process.openStdin()
-st.setRawMode( true );
+st.setEncoding( 'utf8' );
 
 st.addListener "data", (d) ->
 

@@ -10,7 +10,7 @@
 
   st = process.openStdin();
 
-  st.setRawMode(true);
+  st.setEncoding('utf8');
 
   st.addListener("data", function(d) {
     var ws;
