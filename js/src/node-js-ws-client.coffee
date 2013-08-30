@@ -2,6 +2,7 @@
 
 WebSocket 	= require('ws')
 sys 		= require("util")
+exec 		= require('child_process').exec
 
 endpoint = 'ws://192.168.1.116:1337'
 
@@ -22,7 +23,10 @@ st.addListener "data", (d) ->
 
 	ws.on 'message', (data, flags) ->
 
-		console.log data
+		if data.data.text is take_photo
+
+			# run camera
+			exec raspivid -o video.h264 -t 10000			
 
 		# flags.binary will be set if a binary data is received
 		# flags.masked will be set if the data was masked
